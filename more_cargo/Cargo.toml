@@ -3,7 +3,16 @@ name = "more_cargo"
 version = "0.1.0"
 edition = "2021"
 
+# changes the compile options for the debug build
 [profile.dev]
 opt-level = 1
+
+# declares subcrates, called workspaces
+[workspace]
+
+members = [
+    "adder",
+    "add_one",
+]
 
 [dependencies]
