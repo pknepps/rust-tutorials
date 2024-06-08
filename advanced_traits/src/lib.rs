@@ -114,6 +114,16 @@ impl fmt::Display for Point {
 
 impl OutlinePrint for Point {}
 
+// Newtype pattern. i.e. a wrapper around an existing class,
+// made so that we can implement and external trait on an external type.
+struct Wrapper(Vec<String>);
+
+impl fmt::Display for Wrapper {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "[{}]", self.0.join(", "))
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -168,5 +178,11 @@ mod tests {
 *         *
 ***********
 ");
+    }
+
+    #[test]
+    fn newtype() {
+        let w = Wrapper(vec![String::from("hello"), String::from("world")]);
+        println!("w = {w}");
     }
 }
